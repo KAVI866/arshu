@@ -1,0 +1,30 @@
+export const siteConfig = {
+  name: "Gradia",
+  tagline: "The School ERP for Modern Institutions",
+  description:
+    "Gradia is a premium cloud ERP that unifies admissions, academics, fees, examinations, and campus operations into one beautiful, real-time platform for K-12 and higher-education institutions.",
+  url: "https://gradia.app",
+  reference: "REQ-2026-00125",
+  email: "hello@gradia.app",
+  supportEmail: "support@gradia.app",
+  salesEmail: "sales@gradia.app",
+  phone: "+1 (415) 555-0192",
+  whatsapp: "+1 (415) 555-0192",
+  address: "548 Market Street, Suite 240",
+  city: "San Francisco, CA 94104",
+  country: "United States",
+  officeHours: [
+    { day: "Monday – Friday", time: "9:00 AM – 6:00 PM PST" },
+    { day: "Saturday", time: "10:00 AM – 2:00 PM PST" },
+    { day: "Sunday", time: "Closed" },
+  ],
+  socials: [
+    { label: "X / Twitter", href: "https://x.com", icon: "Twitter" },
+    { label: "LinkedIn", href: "https://linkedin.com", icon: "Linkedin" },
+    { label: "GitHub", href: "https://github.com", icon: "Github" },
+    { label: "YouTube", href: "https://youtube.com", icon: "Youtube" },
+  ],
+  schoolCount: 2400,
+  studentCount: 850000,
+  teacherCount: 62000,
+} as const;
