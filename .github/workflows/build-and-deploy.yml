@@ -52,6 +52,12 @@ jobs:
           key: ${{ secrets.AWS_EC2_KEY }}
           port: 22
           script: |
+            sudo apt-get update
+            sudo apt-get install -y docker.io
+            sudo systemctl start docker
+            sudo systemctl enable docker
+            docker --version
+            docker systemctl status docker
             docker pull ${{ env.DOCKER_IMAGE_NAME }}:sass
             docker stop sass-backend || true
             docker rm sass-backend || true
