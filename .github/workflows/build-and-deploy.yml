@@ -54,14 +54,16 @@ jobs:
           script: |
             sudo apt-get update
             sudo apt-get install -y docker.io
+
             sudo systemctl start docker
             sudo systemctl enable docker
-            docker --version
-            docker systemctl status docker
-            docker pull ${{ env.DOCKER_IMAGE_NAME }}:sass
-            docker stop sass-backend || true
-            docker rm sass-backend || true
-            docker run -d \
+
+            sudo docker --version
+            sudo systemctl status docker --no-pager
+            sudo docker pull ${{ env.DOCKER_IMAGE_NAME }}:sass
+            sudo docker stop sass-backend || true
+            sudo docker rm sass-backend || true
+                        sudo docker run -d \
               --name sass-backend \
               -p 3000:3000 \
-              ${{ env.DOCKER_IMAGE_NAME }}
+              ${{ env.DOCKER_IMAGE_NAME }}:sass
