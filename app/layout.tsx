@@ -79,6 +79,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      
       suppressHydrationWarning
       className={`${inter.variable} ${poppins.variable} ${manrope.variable} ${geistMono.variable} antialiased`}
     >

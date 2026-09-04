@@ -3,31 +3,20 @@ import type { NavItem } from "@/types";
 export const navItems: NavItem[] = [
   {
     label: "Product",
-    href: "/features",
-    children: [
-      {
-        label: "Overview",
-        href: "/features",
-        children: [],
-        badge: "25+ modules",
-      },
-      { label: "Admissions & Enrollment", href: "/features#admissions", children: [] },
-      { label: "Academics & Examinations", href: "/features#academics", children: [] },
-      { label: "Fees & Finance", href: "/features#fees", children: [] },
-      { label: "Attendance & Timetables", href: "/features#attendance", children: [] },
-      { label: "Reports & Analytics", href: "/features#reports", children: [] },
-    ],
+    href: "/",
+    children: [],
   },
-  {
-    label: "Solutions",
-    href: "/features",
-    children: [
-      { label: "K-12 Schools", href: "/features#k12", children: [] },
-      { label: "Higher Education", href: "/features#higher-ed", children: [] },
-      { label: "International Schools", href: "/features#international", children: [] },
-      { label: "Group of Institutions", href: "/features#group-institutions", children: [] },
-    ],
-  },
+  // {
+  //   label: "Solutions",
+  //   href: "/features",
+  //   children: [
+  //     { label: "K-12 Schools", href: "/features#k12", children: [] },
+  //     { label: "Higher Education", href: "/features#higher-ed", children: [] },
+  //     { label: "International Schools", href: "/features#international", children: [] },
+  //     { label: "Group of Institutions", href: "/features#group-institutions", children: [] },
+  //   ],
+  // },
+  {label:"features", href:"/features", children:[]},
   { label: "Pricing", href: "/pricing", children: [] },
   { label: "Student Success", href: "/student-success", children: [] },
   {
