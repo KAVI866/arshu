@@ -13,39 +13,36 @@ env: //reuseable variable
   DOCKER_IMAGE_NAME: kavi8667/backend:sass // docker image name
 
 
-jobs:
-  build-and-test-job:
-    env:
-      summa: simple // it use in this job only
-    runs-on: ubuntu-latest
-    steps:
-      -name: checkout code
-       uses: actions/checkout@v2
-       env:
-         summa1: simple // it use in this step only
+jobs:   // here we create the jobs for the workflow mean (build,test,docker file create ,docker run and deploy)
+   build-and-test-job: //name of the job
+    runs-on: ubuntu-latest // specify the operating system for the job
 
-      -name: set node
-       uses: actions/setup-node@v2
-       with: 
-         node-version: 20
-      - name: install dependencies
-       run: npm install
+    steps: // here we define the steps for the job
+      - name: code checkout pannu  // first checkout step for code 
+        uses: actions/checkout@v7  // use checkout the code from the repository privately
 
-       -name: build sass
-       run: npm run build
+      - name: Setup Node.js  // setup nodejs environment for the build
+        uses: actions/setup-node@v7 // use setup-node action to configure Node.js environment
+        with:
+          node-version: 20  // specify the Node.js version to use for the build
 
-       -name: build docker image
-       run: docker build -t ${{env.DOCKER_IMAGE_NAME}} .
+      - name: Install dependencies // install the project dependencies using npm
+        run: npm i  // run npm ci to install dependencies from package-lock.json
 
-       -name: login to docker hub
-       uses:docker/login-action@v2
-       with:
-        username:${{secrets.DOCKER_USERNAME}}
-        password:${{secrets.DOCKER_PASSWORD}}
+      - name: Build // build the project using npm run build command
+        run: npm run build // run the build script defined in package.json to compile the project
+              - name : docker image build pannu  //docker image build pannu
+        run : docker build -t kavi8667/backend:github .  //docker image build tags docker hub
 
-      -name: push docker image
-       run: docker push ${{env.DOCKER_IMAGE_NAME}}
-  
+      - name: Login to Docker Hub  //docker hub login pannu
+        uses: docker/login-action@v4  //docker hub login action
+        with:
+          username: ${{vars.DOCKER_USER_NAME}}  //docker hub username
+          password: ${{secrets.DOCKER_PASS}}  //docker hub password
+
+      - name: Push Docker image to Docker Hub  //docker image push pannu
+        run: docker push kavi8667/backend:github  //docker image push to docker hub
+
   
   deploy-job:  //next job deploy
     needs: build-and-test-job  // this wait for complete the assigned job then execute
