@@ -57,6 +57,10 @@ jobs:
           port: 22
           script: |
             sudo apt-get update
+            sudo apt-get install -y git
+            sudo git --version
+
+
             sudo apt-get install -y docker.io
 
             sudo systemctl start docker
@@ -64,7 +68,7 @@ jobs:
 
             sudo docker --version
             sudo systemctl status docker --no-pager
-
+            git clone https://github.com/KAVI866/arshu.git
             sudo docker rmi ${{env.DOCKER_IMAGE_NAME}}
             sudo docker pull ${{ env.DOCKER_IMAGE_NAME }}:sass
             sudo docker stop ${{env.DOCKER_CONTAINER_NAME}} || true

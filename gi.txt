@@ -1,8 +1,13 @@
-name:sass build and deploy
-on:
-  push:
-    branches:
-      - main
+name:backend build and test  //name for this workflow
+on:  // here we define the event that will trigger the workflow
+  workflow_dispatch:  // this event will trigger the workflow manually
+                  
+                  (or)
+   
+  push: // push event trigger
+    branches:  // trigger on push to main branch
+      - main  // main branch
+
 
 env: //reuseable variable
   DOCKER_IMAGE_NAME: kavi8667/backend:sass // docker image name
