@@ -42,20 +42,35 @@ jobs:
        run: docker push ${{env.DOCKER_IMAGE_NAME}}
   
   
-  deploy-job:
-    needs: build-and-test-job
-    runs-on: ubuntu-latest
+  deploy-job:  //next job deploy
+    needs: build-and-test-job  // this wait for complete the assigned job then execute
+    runs-on: ubuntu-latest //run one vm meachine
 
     steps:
-      -name: server ssh  login panna
-      uses: appleboy/ssh-action@v1
+      -name: server ssh  login panna // name for ssh login panna
+      uses: appleboy/ssh-action@v1  // https://github.com/appleboy/ssh-action
         with:
-          host: ${{vars.HOST_IP}}
-          username: ec-user
-          key: ${{ secrets.AWS_EC2_KEY }}
-          port: 22
+          host: ${{vars.HOST_IP}}  // repo-->setting-->action--> public ip
+          username: ec-user // user name
+          key: ${{ secrets.AWS_EC2_KEY }}  //  aws instanve ppk key same  get repo-->setting-->action-->secrets-->secrets_key
+          port: 22 //ssh port
           script: |
-             docker pull ${{env.DOCKER_IMAGE_NAME}}
+            sudo apt-get update
+            sudo apt-get install -y docker.io
+
+            sudo systemctl start docker
+            sudo systemctl enable docker
+
+            sudo docker --version
+            sudo systemctl status docker --no-pager
+            sudo docker rmi ${{env.DOCKER_IMAGE_NAME}}
+            sudo docker pull ${{ env.DOCKER_IMAGE_NAME }}:sass
+            sudo docker stop sass-backend || true
+            sudo docker rm sass-backend || true
+            sudo docker run -d \
+            --name sass-backend \
+            -p 3000:3000 \
+            ${{ env.DOCKER_IMAGE_NAME }}:sass
 
 
             

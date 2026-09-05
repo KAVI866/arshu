@@ -7,6 +7,7 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: kavi8667/backend
+  
 
 jobs:
   build-and-test-job:
@@ -40,6 +41,9 @@ jobs:
         run: docker push ${{ env.DOCKER_IMAGE_NAME }}:sass
 
   deploy-job:
+    env:
+      DOCKER_CONTAINER_NAME: sass-backend
+      
     needs: build-and-test-job
     runs-on: ubuntu-latest
 
@@ -60,10 +64,12 @@ jobs:
 
             sudo docker --version
             sudo systemctl status docker --no-pager
+
+            sudo docker rmi ${{env.DOCKER_IMAGE_NAME}}
             sudo docker pull ${{ env.DOCKER_IMAGE_NAME }}:sass
-            sudo docker stop sass-backend || true
-            sudo docker rm sass-backend || true
-                        sudo docker run -d \
-              --name sass-backend \
-              -p 3000:3000 \
-              ${{ env.DOCKER_IMAGE_NAME }}:sass
+            sudo docker stop ${{DOCKER_CONTAINER_NAME}} || true
+            sudo docker rm ${{DOCKER_CONTAINER_NAME|| true
+            sudo docker run -d \
+            --name ${{DOCKER_CONTAINER_NAME}} \
+            -p 3000:3000 \
+            ${{ env.DOCKER_IMAGE_NAME }}:sass
