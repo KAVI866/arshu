@@ -73,4 +73,7 @@ jobs:
             ${{ env.DOCKER_IMAGE_NAME }}:sass
 
 
+next  one  job that is deploy use ec2 instance here create one ec2 instance here importnt thing is the security group the ssh in 0.0.0.0//00   next connect the ec2 instance to our linux terminal  use the connect url aws after login 
+
+
             
