@@ -68,8 +68,5 @@ jobs:
             sudo docker rmi ${{env.DOCKER_IMAGE_NAME}}
             sudo docker pull ${{ env.DOCKER_IMAGE_NAME }}:sass
             sudo docker stop ${{env.DOCKER_CONTAINER_NAME}} || true
-            sudo docker rm ${{env.DOCKER_CONTAINER_NAME|| true
-            sudo docker run -d \
-            --name ${{env.DOCKER_CONTAINER_NAME}} \
-            -p 3000:3000 \
-            ${{ env.DOCKER_IMAGE_NAME }}:sass
+            sudo docker rm ${{env.DOCKER_CONTAINER_NAME }} || true
+            sudo docker run -d --name ${{ env.DOCKER_CONTAINER_NAME }} -p 3000:3000 ${{ env.DOCKER_IMAGE_NAME }}:sass
